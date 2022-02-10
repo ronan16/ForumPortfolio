@@ -10,7 +10,7 @@ Projeto base para desenvolvimento de um Fórum que permite algumas funcionalidad
 - Validações de texto.
 - Criptografia de senha e Token de validação de formulário.
 
-Todo o projeto foi desenvolvido utilizando Python e Flask. Segue abaixo a lista das importações e suas versões (extraído utilizando o comando pip freeze):
+Todo o projeto foi desenvolvido utilizando Python e Flask. Segue abaixo a lista das importações e suas versões (disponível no arquivo requeriments.txt):
 
  - bcrypt==3.2.0
  - cffi==1.15.0
