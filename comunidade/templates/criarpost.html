@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+
+{% block body %}
+<div class="container mt-1 d-flex justify-content-center">
+    <div class="row w-100">
+      <div class="col">
+        <div class="card border-0 shadow rounded-3 my-5 w-100">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5"><strong>Criar Post</strong></h5>
+              <!-- CUIDADO! Sempre q tiver upload de arquivo, precisa do ENCTYPE="multipart/form-data"-->
+            <form method="POST" >
+              {{form.csrf_token }}
+             <div class="form-group mb-3">
+                {{form.titulo.label(class="form-control-label")}}
+                {% if form.titulo.errors %}
+                  {{form.titulo(class="form-control form-control-lg mt-2 is-invalid")}}
+                  <div class="invalid-feedback">
+                    {% for erro in form.titulo.errors %}
+                        {{erro}}
+                    {% endfor %}
+                  </div>
+                {%else %}
+                   {{form.titulo(class="form-control form-control-lg mt-2")}}
+                {% endif %}
+              </div>
+
+               <div class="form-group mb-3">
+                {{form.corpo.label(class="form-control-label")}}
+                 {% if form.corpo.errors %}
+                  {{form.corpo(class="form-control form-control-lg mt-2 is-invalid")}}
+                  <div class="invalid-feedback">
+                    {% for erro in form.corpo.errors %}
+                        {{erro}}
+                    {% endfor %}
+                  </div>
+                {%else %}
+                   {{form.corpo(class="form-control form-control-lg mt-2")}}
+                {% endif %}
+              </div>
+
+              <div class="d-grid">
+                {{form.botao_submit(class="w-100 btn btn-lg btn-primary")}}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+    <!--Usando um block, é possível inserir um conteúdo dentro de uma página modelo.<br>
+    ou seja, posso ter todo um cabeçalho/menu/rodapé padronizado e só alterar o<br>
+    conteúdo da minha página para cada route (endpoint)-->
+{% block body %}
+    <div class="container mt-3">
+        <h1>Portfólio: Fórum</h1>
+        <h4>Bem vindo a página modelo de um Fórum.</h4>
+        <p class="text-muted">Nesta página encontram-se conceitos aplicados que serão utilizados para aplicações
+        diversas como: Site de Notícias, Painel Adminsitrativo, Blogs e afins.</p>
+        <hr>
+        <h4>Postagens mais recentes</h4>
+        {% if posts.all() %}
+            {% for post in posts %}
+            <div class="container">
+                <div class="row border mt-4 p-3 stats justify-content-center">
+                    <div class="col-3 text-center">
+                        <div class="image me-3"> <img src="{{url_for('static',filename='fotos_perfil/{}'.format(post.author.photo) )}}" class="rounded" width="155"> </div>
+                        <h4 class="mb-0 mt-0">{{post.author.username}}</h4> <span>{{post.author.email}}</span>
+                        <hr>
+                        <strong>Cursos</strong>
+                            {% for item in post.author.courses.split(';')%}
+                                    <div class="col w-100 ">
+                                        <button class="btn btn-warning btn-sm mt-2 w-100" disabled>{{item}}</button>
+                                    </div>
+                            {% endfor %}
+                    </div>
+                    <div class="col-9">
+                        <a href="{{url_for('exibir_post', post_id=post.id)}}" class="text-decoration-none text-warning">
+                            <h3>{{post.title}}</h3>
+                        </a>
+                        <small class="text-muted">Data de Criação: {{post.date_creation.strftime('%d/%m/%Y')}}</small><br><hr>
+                        <p>{{post.content}}</p>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">Não existem postagens feitas até o momento. Cadastre-se para realizar uma nova postagem</p>
+        {% endif %}
+    </div>
+{% endblock %}

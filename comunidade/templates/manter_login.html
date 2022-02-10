@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container">
+    <h1>Faça login ou se Cadastre em nosso portal</h1>
+    <hr>
+    <div class="row">
+      <div class="col-sm-12 col-md-12  col-lg-6 mx-auto d-flex justify-content-center">
+        <div class="card border-0 shadow rounded-3 my-5 w-100">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">Acessar Sistema</h5>
+            <form method="POST">
+              {{formLogin.csrf_token }}
+              <div class="form-group mb-3">
+                {{formLogin.username.label(class="form-control-label")}}
+                {{formLogin.username(class="form-control form-control-lg mt-2")}}
+              </div>
+              <div class="form-group   mb-3">
+                {{formLogin.password.label(class="form-control-label")}}
+                {{formLogin.password(class="form-control form-control-lg mt-2")}}
+              </div>
+
+              <div class="form-check mb-3">
+                {{formLogin.remember_username(class="form-check-input")}}
+                {{formLogin.remember_username.label(class="form-control-label")}}
+              </div>
+              <div class="d-grid">
+                {{formLogin.btn_submitLoginUsuario(class="w-100 btn btn-lg btn-primary")}}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Cadastrar no Sistema -->
+      <div class="col-sm-12 col-md-12 col-lg-6 mx-auto d-flex justify-content-center">
+        <div class="card border-0 shadow rounded-3 my-5 w-100">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastro no sistema</h5>
+            <p> Ainda não é cadastrado? Cadastre-se agora! É de graça.</p>
+            <form method="POST" >
+              {{ formCriarUsuario.csrf_token }}
+
+              <div class="form-group mb-3">
+                {{formCriarUsuario.username.label(class="form-control-label")}}
+                {% if formCriarUsuario.username.errors %}
+                  {{formCriarUsuario.username(class="form-control form-control-lg mt-2 is-invalid")}}
+                  <div class="invalid-feedback">
+                    {% for erro in formCriarUsuario.username.errors %}
+                        {{erro}}
+                    {% endfor %}
+                  </div>
+                {%else %}
+                   {{formCriarUsuario.username(class="form-control form-control-lg mt-2")}}
+                {% endif %}
+              </div>
+               <div class="form-group mb-3">
+                {{formCriarUsuario.email.label(class="form-control-label")}}
+
+                 <!-- CRIANDO UM MECANISMO DE VALIDACAO EM PYTHON PARA OS FORMULÁRIOS -->
+
+                 {% if formCriarUsuario.email.errors %}
+                  {{formCriarUsuario.email(class="form-control form-control-lg mt-2 is-invalid")}}
+                  <div class="invalid-feedback">
+                    {% for erro in formCriarUsuario.email.errors %}
+                        {{erro}}
+                    {% endfor %}
+                  </div>
+                {%else %}
+                   {{formCriarUsuario.email(class="form-control form-control-lg mt-2")}}
+                {% endif %}
+                 
+
+
+                 <!-- FIM DA VALIDAÇÃO -->
+              </div>
+              <div class="form-group mb-3">
+                {{formCriarUsuario.password.label(class="form-control-label")}}
+
+                {% if formCriarUsuario.password.errors %}
+                  {{formCriarUsuario.password(class="form-control form-control-lg mt-2 is-invalid")}}
+                  <div class="invalid-feedback">
+                    {% for erro in formCriarUsuario.password.errors %}
+                        {{erro}}
+                    {% endfor %}
+                  </div>
+                {%else %}
+                   {{formCriarUsuario.password(class="form-control form-control-lg mt-2")}}
+                {% endif %}
+
+              </div>
+               <div class="form-group mb-3">
+                {{formCriarUsuario.confirm_password.label(class="form-control-label")}}
+                 
+                  {% if formCriarUsuario.confirm_password.data != formCriarUsuario.password.data  %}
+                  {{formCriarUsuario.confirm_password(class="form-control form-control-lg mt-2 is-invalid")}}
+                  <div class="invalid-feedback">
+                    <span>O confirmar senha não é igual a senha. Favor verificar.</span>
+                  </div>
+                {%else %}
+                  {{formCriarUsuario.confirm_password(class="form-control form-control-lg mt-2")}}
+                {% endif %}
+              </div>
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="cadTermos">
+                <label class="form-check-label" for="cadTermos">
+                  Li e concordo com os <a href="#">Termos de Usuário</a>.
+                </label>
+              </div>
+              <div class="d-grid">
+                {{formCriarUsuario.btn_submitCadastroUsuario(class="w-100 btn btn-lg btn-primary")}}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}
