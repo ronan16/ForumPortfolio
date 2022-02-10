@@ -1,4 +1,6 @@
 # ForumPortfolio
+## Link para clonar o projeto: https://git.heroku.com/blogexemplo.git
+
 Projeto base para desenvolvimento de um Fórum que permite algumas funcionalidades, tais como: 
 - Cadastro de usuários; 
 - Autenticação de Login 
